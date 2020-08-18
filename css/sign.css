@@ -1,0 +1,85 @@
+* {
+      box-sizing: border-box;
+  }
+
+  /* For mobile phones: */
+
+
+
+ body{
+    font-family: tahoma;
+    background-color: #e9ebee;
+}
+
+.grid{
+    
+    display:grid;
+    grid-template-columns: 100% ;
+    padding: 0.1px;
+  
+}
+#bar1{
+    height: 100px;
+    background-color: cornflowerblue;
+    color:white;
+    padding: 10px;
+    
+    margin: auto;
+    }
+    
+    #logo{
+        font-size: 40px;
+        float: left;
+
+    }
+
+#singin_button{
+    background-color: #42b72a;
+    width: 70px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 4px;
+    float: right;
+}
+#singup_button{
+    background-color: #42b72a;
+    width: 70px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 4px;
+    float: right;
+}
+#bar2{
+    background-color: white;
+   font-weight: normal;
+    margin:auto;
+    margin-top:50px;
+    padding: 10px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+#text{
+    height: 40px;
+    width: 150px;
+    border-radius:4px;
+    border:solid 1px #bbb;
+    padding:4px;
+    font-size:14px;
+}
+
+#button {
+    width:150px;
+    height:40px;
+    border-radius: 4px;
+    font-weight: bold;
+    border:none;
+    background-color: cornflowerblue;
+    color:white;
+    
+}
+#input{
+    width: 150px;
+    border-radius: 4px;
+    height:40px;
+}

@@ -1,0 +1,19 @@
+body{
+            font-family: tahoma;
+            background-color: #e9ebee;
+
+        }
+       
+        #profile_pic{
+            
+            height: 100px;
+           border: solid 2px white;
+
+        }
+      
+      
+    
+   
+        #map {
+            height: 100%;
+          }

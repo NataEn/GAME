@@ -1,0 +1,46 @@
+
+  * {
+    box-sizing: border-box;
+}
+
+
+body{
+                font-family: tahoma;
+                background-color: #e9ebee;
+                
+
+            }
+            
+    
+           #menu_button{
+               
+            display: inline;
+            margin:2px;
+          
+            
+        }
+            #profile_pic{
+                width: 100px;
+                height: 100px;
+                border: solid 2px white;
+            }
+      
+      
+
+        #post_bar{
+            margin-top: 20px;
+            background-color: white;
+            padding: 1px;
+            
+            
+        }
+            
+
+        #post{
+            padding: 4px;
+            font-size: 11px;
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+    
