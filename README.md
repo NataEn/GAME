@@ -7,19 +7,15 @@ First prototype consists the following pages in HTML/CSS/PHP/JS/JQ/SQL using XAM
 * Php classes connects to members database(db) for user data .
 * Php classes connects to locations db for markers data .
 
-:)
 
-In need to be fixed ;
+ In need to be fixed & create
 
-* User-map SAVE marker to locations db and show in admin-map for status check.
-* Defult avatar pic for profille image .
-* Friends - for now all members .
-* Design - colors...
-
-Create ;
-
-* Question page, classes & db.
-* Points & badges earned class + column in memebers db.
-* Posts in profile = corect answer / badge earned / add new question with status 1.
-
-
+ * Friends - for now all members .- change to ranks
+ * Design - colors... 
+ *INSERT user id to location db - 
+ *INSERT city in question db
+ *INSERT location id in question db
+ *INSERT user score and echo on profile
+ *game ruls and a bout
+ * setting - privete/public profile pic \ logout \ 
+ 
