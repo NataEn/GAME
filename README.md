@@ -6,8 +6,8 @@ First prototype consists the following pages in HTML/CSS/PHP/JS/JQ/SQL using XAM
 
 * Php classes connects to members database(db) for user data .
 * Php classes connects to locations db for markers data .
-Php classes connects to choices db for location question data .
-* 
+* Php classes connects to choices db for location question data .
+
 
 
  In need to be fixed & create
