@@ -30,6 +30,7 @@
         // save progress if post uncomplite form
             $first_name = $_POST['first_name'];
              $last_name = $_POST['last_name'];
+             $age = $_POST['age'];
              $gender = $_POST['gender'];
              $email = $_POST['email'];
     }
@@ -55,7 +56,7 @@
             <div>
                 <div id="logo" ><img src="./image/dblogo1234.png" style="width:100px;float:left;"></div>
             
-                <div id="singin_button"> Sign in</div> 
+                <a href="signin.php" style="text-decoration: none;color:white;"><div id="singin_button"> Sign in</div> </a>
             </div>
         </div>
 
@@ -69,6 +70,8 @@
                 <input value="<?php echo $first_name ?>" name="first_name" type="text" id="text" placeholder="First name">
                 <br><br>
                 <input value="<?php echo $last_name ?>"name="last_name" type="text" id="text" placeholder="Last name">
+                <br><br>
+                <input value="<?php echo $age ?>"name="age" type="number" id="text" placeholder="age">
                 <br><br>
                 <span style="font-weight: normal;" >Gender :</span> 
                 <br>

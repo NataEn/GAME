@@ -1,17 +1,18 @@
 <?php 
      session_start();
 
-     //conect  2 DB (members & posts) with classes
+     //conect classes
      include("classes/connect.php");
      include("classes/signin.php");
      include("classes/user.php");
      include("classes/post.php");
-     include('locations_model.php');
 
-     // check if user signin 
+     
+
      $signin = new Signin();
      $user_data = $signin->check_signin($_SESSION['doorban_userid']);
-     
+    //ridirect save to add question page
+ 
 
             ?>
             <html>
@@ -26,6 +27,7 @@
         height: 100%;
         margin: 0;
         padding: 0;
+
     }
  /* Always set the map height explicitly to 
  
@@ -34,6 +36,34 @@
     #map {
         height: 100%;
     }
+
+    input{
+       width: 95%;
+       height: 35px;
+       padding: 1px ;
+       margin:2px 2px 25px 1px ;
+    
+    }
+    textarea{
+        width: 95%;
+        height: 35px;
+       padding: 1px ;
+       margin:2px 2px 25px 1px ;
+       }
+
+    a{
+        padding: 0px;
+        margin: 0px;
+    }
+    table{
+        font-weight: bold;
+        
+    }
+    #button1{
+        background-color: cornflowerblue;
+        border-style: none;
+    }
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript"
@@ -52,14 +82,13 @@
 
     <div id="map"></div>
     <script>
+        //alert("When you add a new point you accept the add rules of the game , for more information check the ruls page ");
         /**
          * Create new map
          */
         var infowindow;
         var map;
-        
         var purple_icon =  'http://maps.google.com/mapfiles/ms/icons/purple-dot.png' ;
-        var locations = <?php get_confirmed_locations() ?>;
         var myOptions = {
             zoom: 3,
             center: new google.maps.LatLng(46.87916, -3.32910),
@@ -107,15 +136,30 @@
                 map: map,
                 animation: google.maps.Animation.DROP,
                 id: 'marker_' + markerId,
-                html: "    <div id='info_"+markerId+"'>\n" +
-                "        <table class=\"map1\">\n" +
-                "            <tr>\n" +
-                "                <td><a>Description:</a></td>\n" +
-                "                <td><textarea  id='manual_description' placeholder='Description'></textarea></td></tr>\n" +
-                "            <tr><td></td><td><input type='button' value='Save' onclick='saveData("+lat+","+lng+")'/></td></tr>\n" +
+                html: "    <div  id='info_"+markerId+"'>\n" +
+                "        <table  class=\"map1\">\n" +
+                "                <tr><td><a>Description:</a></td></tr>\n" +   
+                "                <tr><td><textarea id='manual_description' placeholder='Description'></textarea></td></tr>\n" +
+                "                <tr><td><a>question:</a></td></tr>\n" + 
+                "                <tr><td><input  id='question' placeholder='Question'/></td></tr>\n" + 
+                "                <tr><td><a>Choice1:</a></td></tr>\n" + 
+                "                <tr><td><input  id='choice1' placeholder='Choice1'/></td></tr>\n" + 
+                "                <tr><td><a>Choice2:</a></td></tr>\n" + 
+                "                <tr><td><input  id='choice2' placeholder='Choice2'/></td></tr>\n" + 
+                "                <tr><td><a>Choice3:</a></td></tr>\n" + 
+                "                <tr><td><input  id='choice3' placeholder='Choice3'/></td></tr>\n" + 
+                "                <tr><td><a>Choice4:</a></td></tr>\n" + 
+                "                <tr><td><input  id='choice4' placeholder='Choice4'/></td></tr>\n" + 
+                "                <tr><td><a>Choice5:</a></td></tr>\n" + 
+                "                <tr><td><input  id='choice5' placeholder='Choice5'/></td></tr>\n" +       
+                "                <tr><td><a>Correct Choice:</a></td></tr>\n" + 
+                "                <tr><td><input  id='corect_choice' placeholder='Correct Choice'/></td></tr>\n" + 
+                "                <tr><td><a>About:</a></td></tr>\n" + 
+                "                <tr><td><input  id='about' placeholder='About'/></td></tr>\n" + 
+                "               <tr></td><td><input id='button1' type='submit' value='Save' onclick='saveDataLocation("+lat+","+lng+")'/></td></tr>\n" +
                 "        </table>\n" +
                 "    </div>"
-            });
+            });                        
             markers[markerId] = marker; // cache marker in markers object
             bindMarkerEvents(marker); // bind right click event to marker
             bindMarkerinfo(marker); // bind infowindow with click event to marker
@@ -163,7 +207,7 @@
          * loop through (Mysql) dynamic locations to add markers to map.
          */
         var i ; var confirmed = 0;
-        for (i = 0; i < locations.length; i++) {
+        for (i = 0; i < location.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 map: map,
@@ -182,8 +226,16 @@
                     infowindow = new google.maps.InfoWindow();
                     confirmed =  locations[i][4] === '1' ?  'checked'  :  0;
                     $("#confirmed").prop(confirmed,locations[i][4]);
-                    $("#id").val(locations[i][0]);
+                    $("#location_id").val(locations[i][0]);
                     $("#description").val(locations[i][3]);
+                    $("#question").val(locations[i][5]);
+                    $("#about").val(locations[i][6]);
+                    $("#corect_choice").val(locations[i][2]);
+                    $("#choice1").val(locations[i][3]);
+                    $("#choice2").val(locations[i][3]);
+                    $("#choice3").val(locations[i][3]);
+                    $("#choice4").val(locations[i][3]);
+                    $("#choice5").val(locations[i][3]);
                     $("#form").show();
                     infowindow.setContent(marker.html);
                     infowindow.open(map, marker);
@@ -196,17 +248,28 @@
          * @param lat  A latitude of marker.
          * @param lng A longitude of marker.
          */
-        function saveData(lat,lng) {
+        function saveDataLocation(lat,lng) {
             var description = document.getElementById('manual_description').value;
-            var url = 'locations_model.php?add_location&description=' + description + '&lat=' + lat + '&lng=' + lng;
+            var question = document.getElementById('question').value;
+            var about = document.getElementById('about').value;
+            var corect_choice = document.getElementById('corect_choice').value;
+            var choice1 = document.getElementById('choice1').value;
+            var choice2 = document.getElementById('choice2').value;
+            var choice3 = document.getElementById('choice3').value;
+            var choice4 = document.getElementById('choice4').value;
+            var choice5 = document.getElementById('choice5').value;
+            var url = 'classes/locations_model.php?add_location&description=' + description + '&lat=' + lat + '&lng=' + lng + '&question=' + question  + '&about=' + about + '&corect_choice=' + corect_choice + '&choice1=' + choice1 + '&choice2=' + choice2+ '&choice3=' + choice3+ '&choice4=' + choice4+ '&choice5=' + choice5 ;
             downloadUrl(url, function(data, responseCode) {
                 if (responseCode === 200  && data.length > 1) {
                     var markerId = getMarkerUniqueId(lat,lng); // get marker id by using clicked point's coordinate
                     var manual_marker = markers[markerId]; // find marker
                     manual_marker.setIcon(purple_icon);
                     infowindow.close();
-                    infowindow.setContent("<div style=' color: purple; font-size: 25px;'> Waiting for admin confirm!!</div>");
+                    infowindow.setContent("<div style=' color: purple; font-size: 15px;'> Waiting for admin confirm!!</div>");
                     infowindow.open(map, manual_marker);
+                    //direct to location question form 
+                    window.location.href = "add.php";
+     
 
                 }else{
                     console.log(responseCode);

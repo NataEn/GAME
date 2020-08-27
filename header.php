@@ -54,7 +54,15 @@
                     {
                         $image = $user_data['profile_image'];
                     }
-                      
+                              //image of posts user -  defult avatar
+                              else{         
+                                $image = "./image/boy.png";
+                                if($user_data['gender'] == "Female")
+                                {
+                                    $image = "./image/girl.png";
+                                }
+                            }
+                
                     ?>
                     <img src="<?php echo $image ?>" style="width:30px;height:30px;float:right;border-radius:50%;">
                 </a>

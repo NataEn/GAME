@@ -26,7 +26,7 @@
             echo "</div>";
         }
         else { //else redirect to login page 
-            header("Location: profile.php");
+            header("Location: user-map.php");
             die;
         }
         // save progress if post uncomplite form
@@ -55,7 +55,7 @@
             
             <div id="logo" ><img src="./image/dblogo1234.png" style="width:100px;float:left;"></div>
         
-            <div id="singup_button"> Sign up</div>
+           <a href="signup.php" style="text-decoration: none;color:white;"> <div id="singup_button"> Sign up</div></a>
           
         </div>
 

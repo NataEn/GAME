@@ -55,6 +55,7 @@
         {
             $first_name = ucfirst($data['first_name']);
             $last_name = ucfirst($data ['last_name']);
+            $age = $data['age'];
             $gender = $data['gender'];
             $email = $data['email'];
             $password = $data['password'];
@@ -65,8 +66,8 @@
             $userid = $this->create_userid();
 
             // insert data to values
-            $query="insert into members(userid,first_name,last_name,gender,email,password,url_adress)
-            VALUES('$userid','$first_name','$last_name','$gender','$email','$password','$url_adress')";
+            $query="insert into members(userid,first_name,last_name,age,gender,email,password,url_adress)
+            VALUES('$userid','$first_name','$last_name','$age','$gender','$email','$password','$url_adress')";
 
 
             // save to db

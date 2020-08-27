@@ -10,7 +10,7 @@ class Database
         private $password="";
         private $db = "doorban";
 
-    function connect()
+   function connect()
     {
         $connection = mysqli_connect($this->host,$this->username,$this->password,$this->db);
         return $connection;

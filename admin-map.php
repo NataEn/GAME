@@ -1,11 +1,7 @@
 <?php
 
-            include("locations_model.php");
-
-
-
-
-
+            include("classes/locations_model.php");
+            
 
 ?>
 
@@ -45,7 +41,7 @@
     var infowindow;
     var red_icon =  'http://maps.google.com/mapfiles/ms/icons/red-dot.png' ;
     var purple_icon =  'http://maps.google.com/mapfiles/ms/icons/purple-dot.png' ;
-    var locations = <?php get_all_locations() ?>;
+    var locations = <?php get_all_locations(); ?>;
 
     function initMap() {
         var france = {lat: 46.87916, lng: -3.32910};
@@ -70,7 +66,7 @@
                 return function() {
                     confirmed =  locations[i][4] === '1' ?  'checked'  :  0;
                     $("#confirmed").prop(confirmed,locations[i][4]);
-                    $("#id").val(locations[i][0]);
+                    $("#location_id").val(locations[i][0]);
                     $("#description").val(locations[i][3]);
                     $("#form").show();
                     infowindow.setContent(marker.html);
@@ -80,10 +76,10 @@
         }
     }
 
-    function saveData() {
+    function saveDataLocation() {
         var confirmed = document.getElementById('confirmed').checked ? 1 : 0;
-        var id = document.getElementById('id').value;
-        var url = 'locations_model.php?confirm_location&id=' + id + '&confirmed=' + confirmed ;
+        var id = document.getElementById('location_id').value;
+        var url = 'classes/locations_model.php?confirm_location&location_id=' + location_id + '&confirmed=' + confirmed ;
         downloadUrl(url, function(data, responseCode) {
             if (responseCode === 200  && data.length > 1) {
                 infowindow.close();
@@ -121,11 +117,21 @@
             <td><textarea disabled id='description' placeholder='Description'></textarea></td>
         </tr>
         <tr>
+            <input name="id" type='hidden' id='question'/>
+            <td><a>question:</a></td>
+            <td><textarea disabled name='question' placeholder='question'></textarea></td>
+        </tr>
+        <tr>
+            <input name="id" type='hidden' id='location_id'/>
+            <td><a>about:</a></td>
+            <td><textarea disabled name='about' placeholder='about'></textarea></td>
+        </tr>
+        <tr>
             <td><b>Confirm Location ?:</b></td>
             <td><input id='confirmed' type='checkbox' name='confirmed'></td>
         </tr>
 
-        <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>
+        <tr><td></td><td><input type='button' value='Save' onclick='saveDataLocation()'/></td></tr>
     </table>
 </div>
 <script async defer

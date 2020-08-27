@@ -65,6 +65,13 @@
                     {
                         $image = $user_data['profile_image'];
                     }
+                    else{         
+                        $image = "./image/boy.png";
+                        if($user_data['gender'] == "Female")
+                        {
+                            $image = "./image/girl.png";
+                        }
+                    }
 
                     
                     ?>
