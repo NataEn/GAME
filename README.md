@@ -12,13 +12,14 @@ First prototype consists the following pages in HTML/CSS/PHP/JS/JQ/SQL using XAM
 
  In need to be fixed & create
 
-* question select choice 
- * Friends - for now all members .- change to ranks
- * Design - colors... 
- *INSERT user id to location db - 
- *INSERT city in question db
+*clean up 
+*question select choice 
+ *Friends - for now all members .- change to ranks
+ *Design - colors... 
+ *INSERT user id to location db - session 
+ *INSERT city in question db via lat&lng
  
- *INSERT user score and echo on profile
- *game ruls and a bout
- * setting - privete/public profile pic \ logout \ 
+ *INSERT user score and echo on profile page
+ *game ruls and about
+ *setting - privete/public profile pic \ logout \ 
  
