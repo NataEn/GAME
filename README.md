@@ -1,25 +1,9 @@
 # GAME - d_b
 
 
-First prototype consists the following pages in HTML/CSS/PHP/JS/JQ/SQL using XAMPP - APACH & MYSQL ;
-* Signup, Signin, Profile, Change profile image, User-map, Admin-map, Add, Friends, Classes & Css pages included.
+in this interactive game you can create a profile and change profile image, answer questions to win points and badges and add cordination with questions to a database.
 
-* Php classes connects to members database(db) for user data .
-* Php classes connects to locations db for markers data .
-* Php classes connects to choices db for location question data .
-
-
-
- In need to be fixed & create
-
-*clean up 
-*question select choice 
- *Friends - for now all members .- change to ranks
- *Design - colors... 
- *INSERT user id to location db - session 
- *INSERT city in question db via lat&lng
- 
- *INSERT user score and echo on profile page
- *game ruls and about
- *setting - privete/public profile pic \ logout \ 
- 
+to run this code download xampp [apach & sql].
+create database for members , locations and choices .
+change the google api code [use google console].
+create user and play .
