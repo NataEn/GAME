@@ -5,7 +5,7 @@
             include("classes/connect.php");
             include("classes/signin.php");
             include("classes/user.php");
-            include("classes/post.php");
+          //  include("classes/post.php");
 
             // check if user signin 
             $signin = new Signin();
@@ -15,9 +15,9 @@
  
                 //collect posts  
 
-                $post = new Post();
-                $id = $_SESSION['doorban_userid'];
-                $posts = $post->get_posts($id);
+              //  $post = new Post();
+              //  $id = $_SESSION['doorban_userid'];
+              //  $posts = $post->get_posts($id);
 
     ?>
 
@@ -118,16 +118,16 @@
                 <?php
             
                 // use class User with get _user function  & Post to post from db
-                if($posts)
-                {
-                    foreach($posts as $ROW)
-                    {
+              //  if($posts)
+              //  {
+              //      foreach($posts as $ROW)
+                //    {
                         //conect between members and posts db 
-                        $user = new User();
-                        $ROW_USER = $user->get_user($ROW['userid']);
-                        include("post.php");
-                    }
-                }
+                  //      $user = new User();
+                  //      $ROW_USER = $user->get_user($ROW['userid']);
+                  //      include("post.php");
+                 //   }
+          //      }
                 
 
                 ?>
