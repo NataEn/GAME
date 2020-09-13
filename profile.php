@@ -39,18 +39,7 @@
                  
 
 
-             
-                <!-- menu buttons-->
-             
-                <div>
-                <a href="user-map.php" style="text-decoration: none;color:black;"><div id="menu_button">Play    | </div></a>
-                <a href="friends.php" style="text-decoration: none;color:black;"><div id="menu_button">Friends    | </div></a>
-                <a href="add.php" style="text-decoration: none;color:black;"><div id="menu_button">Add     | </div></a>
-                <a href="about.php" style="text-decoration: none;color:black;"><div id="menu_button">About    |  </div></a>
-                 <div id="menu_button">Settings</div>
-                </div>
-
-                
+                    
             <div style="display:flex;">
 
                 <!-- profile pic-->
@@ -92,7 +81,7 @@
 
 
                     <!-- points earned -->
-                <div id="points_badges" style="flex: 5;background-color:cornflowerblue;text-align:center;font-size:25px;background-size:100%;margin-left:10px;padding-top:20px;" >
+                <div id="points_badges" style="flex: 5;background-color:#1111;text-align:center;font-size:25px;background-size:100%;margin-left:10px;padding-top:20px;" >
                
                
                     <!--show points_earned-->

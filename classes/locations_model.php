@@ -1,9 +1,13 @@
 <?php
 
+include("classes/connect.php");
 // Gets data from URL parameters.
+
+
 
 if(isset($_GET['add_location'])) {
     add_location();
+
 }
 
 
@@ -26,6 +30,8 @@ function add_location(){
     $question =ucfirst($_GET['question']);
     $about =ucfirst($_GET['about']);
     $corect_choice = $_GET['corect_choice'];
+    $userid = $_GET['userid'];
+
     //choicess arrey
     $choices = array();
     $choices[1] =ucfirst($_GET['choice1']);
@@ -42,11 +48,12 @@ function add_location(){
   ///
 
     // Inserts new row with place data.
-    $query = sprintf("INSERT INTO `locations`(location_id, lat, lng, description,question,about)  VALUES ('$location_id', '$lat', '$lng','$description','$question','$about')",
+    $query = sprintf("INSERT INTO `locations`(location_id, lat, lng, description,question,about,userid)  VALUES ('$location_id', '$lat', '$lng','$description','$question','$about','$userid')",
         mysqli_real_escape_string($con,$lat),
         mysqli_real_escape_string($con,$lng),
         mysqli_real_escape_string($con,$description));
 
+        
     
       
     $result = mysqli_query($con,$query);
@@ -104,14 +111,27 @@ function confirm_location(){
     }
     $location_id =$_GET['location_id'];
     $confirmed =$_GET['confirmed'];
+    $question =$_GET['question'];
+    $description =$_GET['description'];
+    $about = $_GET['about'];
+
     // update location with confirm if admin confirm.
-    $query = "UPDATE `locations` SET location_status = $confirmed WHERE location_id = $location_id ";
-    $result = mysqli_query($con,$query);
+    $query = "UPDATE `locations` SET location_status = $confirmed WHERE location_id = $location_id  ";
+    $result = mysqli_query($con,$query); 
+
+    //not working!!!
+    //$query = "INSERT INTO `locations` (description,question,about) VALUES ('$description','$question','$about') WHERE location_id = $location_id ";
+    //$result = mysqli_query($con,$query); 
+    /////////////////////////////////
+
+
     echo "Inserted Successfully";
     if (!$result) {
         die('Invalid query: ' . mysqli_error($con));
     }
+
 }
+
 function get_confirmed_locations(){
     $con=mysqli_connect ("localhost", 'root', '','doorban');
     if (!$con) {
@@ -141,7 +161,7 @@ function get_all_locations(){
         die('Not connected : ' . mysqli_connect_error());
     }
     // update location with location_status if admin location_status.
-    $sqldata = mysqli_query($con,"SELECT location_id ,lat,lng,description,location_status AS isconfirmed FROM `locations`");
+    $sqldata = mysqli_query($con,"SELECT location_id ,lat,lng,description,location_status,question,about AS isconfirmed FROM `locations`");
 
     $rows = array();
     while($r = mysqli_fetch_assoc($sqldata)) {
@@ -171,6 +191,8 @@ function array_flatten($array) {
     }
     return $result;
 }
+
+
 
 ?>
 

@@ -1,8 +1,16 @@
 <?php
 
+include("classes/connect.php");
+include("classes/signin.php");
+include("classes/user.php");
+
+
+$signin = new Signin();
+$user_data = $signin->check_signin($_SESSION['doorban_userid']);
 
 
 function get_confirmed_locations(){
+
     $con=mysqli_connect ("localhost", 'root', '','doorban');
     if (!$con) {
         die('Not connected : ' . mysqli_connect_error());
@@ -19,12 +27,16 @@ function get_confirmed_locations(){
 
     $indexed = array_map('array_values', $rows);
     //  $array = array_filter($indexed);
-
  
 
     echo json_encode($indexed);
     if (!$rows) {
         return null;
     }
-}
 
+    }
+    
+
+  
+
+    

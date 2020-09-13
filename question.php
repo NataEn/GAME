@@ -1,45 +1,12 @@
 <?php
+
 session_start();
 
+include('classes/question.php');
 
-    include("classes/connect.php");
-    include("classes/signin.php");
-    include("classes/user.php");
-    include("classes/process.php");
-    
-   
-    //check if signed in
-    $signin = new Signin();
-    $user_data = $signin->check_signin($_SESSION['doorban_userid']);
-
-    
-    //set question number
-    $number = (int)$_GET['n'];
-
-    //get question
-    $query = "SELECT * FROM `locations` where location_id = $number";
-
-
-    //get result
-    $result = $conn->query($query) or die ($conn->error.__LINE__);
-
-    $question = $result->fetch_assoc();
-
-     //get choice
-     $query = "SELECT * FROM `choises` where location_id = $number";
-
-
-     //get results
-     $choises = $conn->query($query) or die ($conn->error.__LINE__);
-    
-     // get total questions
-    $query = "SELECT * FROM `locations`";
-    //get results
-    $results = $conn->query($query) or die ($conn->error.__LINE__);
-    $total = $results->num_rows;
-   
-        
 ?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,7 +17,7 @@ session_start();
     </head>
     <body>
       
-          <!--top bar-->
+  
         <div>
             <?php include("header.php");?>
 
@@ -59,11 +26,11 @@ session_start();
         
         <main>
             <div class="container">
-            <div class="current"> Question <?php echo $question['question_number'];?> of <?php echo $total;?></div>
+            <div class="current"> Question <?php echo $_SESSION['location_id'];?> of <?php echo $total;?></div>
             <p class="question">
-                <?php echo $question['text'];?>
+                <?php echo $question['question'];?>
             </p>
-            <form method="post" action="classes/process.php">
+            <form method="post" action="final.php">
                 <ul class="choises">
                 <?php while($row = $choises->fetch_assoc()): ?>
                     <li><input name="choises" type="radio" value="<?php echo $row['id'];?>"/><?php echo $row['text'];?></li> 
@@ -77,7 +44,7 @@ session_start();
         </main>
 
 
-
+          
 
 
 <?php

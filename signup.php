@@ -52,7 +52,7 @@
         <div id="grid" >
     
         <!-- top bar-->
-        <div id="bar1"> 
+        <div id="bar1" style="background-color: cornflowerblue;"> 
             <div>
                 <div id="logo" ><img src="./image/dblogo1234.png" style="width:100px;float:left;"></div>
             

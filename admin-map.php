@@ -68,6 +68,8 @@
                     $("#confirmed").prop(confirmed,locations[i][4]);
                     $("#location_id").val(locations[i][0]);
                     $("#description").val(locations[i][3]);
+                    $("#question").val(locations[i][5]);
+                    $("#about").val(locations[i][6]);
                     $("#form").show();
                     infowindow.setContent(marker.html);
                     infowindow.open(map, marker);
@@ -78,8 +80,11 @@
 
     function saveDataLocation() {
         var confirmed = document.getElementById('confirmed').checked ? 1 : 0;
-        var id = document.getElementById('location_id').value;
-        var url = 'classes/locations_model.php?confirm_location&location_id=' + location_id + '&confirmed=' + confirmed ;
+        var location_id = document.getElementById('location_id').value;
+        var description = document.getElementById('description').value;
+        var question = document.getElementById('question').value;
+        var about = document.getElementById('about').value;
+        var url = 'classes/locations_model.php?confirm_location&location_id=' + location_id + '&confirmed=' + confirmed + '&description=' +description+ '&question=' + question  + '&about=' +about  ;
         downloadUrl(url, function(data, responseCode) {
             if (responseCode === 200  && data.length > 1) {
                 infowindow.close();
@@ -112,25 +117,25 @@
 <div style="display: none" id="form">
     <table class="map1">
         <tr>
-            <input name="id" type='hidden' id='id'/>
+            
             <td><a>Description:</a></td>
-            <td><textarea disabled id='description' placeholder='Description'></textarea></td>
+            <td><textarea   name='description' id='description' placeholder='Description'></textarea></td>
         </tr>
         <tr>
-            <input name="id" type='hidden' id='question'/>
             <td><a>question:</a></td>
-            <td><textarea disabled name='question' placeholder='question'></textarea></td>
+            <td><textarea name='question' id='question' placeholder='Question'></textarea></td>
+        </tr>
+            <td><a>about:</a></td>
+            <td><textarea name='about' id='about' placeholder='About'></textarea></td>
         </tr>
         <tr>
-            <input name="id" type='hidden' id='location_id'/>
-            <td><a>about:</a></td>
-            <td><textarea disabled name='about' placeholder='about'></textarea></td>
+            <td><b>location id:</b></td>
+            <td><input name="location_id"  id='location_id'/></td>
         </tr>
         <tr>
             <td><b>Confirm Location ?:</b></td>
             <td><input id='confirmed' type='checkbox' name='confirmed'></td>
         </tr>
-
         <tr><td></td><td><input type='button' value='Save' onclick='saveDataLocation()'/></td></tr>
     </table>
 </div>

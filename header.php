@@ -33,6 +33,15 @@
                
                
             }
+    
+            #menu_button{
+               
+               display: inline;
+               margin:2px;
+             
+               
+           }
+            
             </style>
             
              </head>
@@ -64,7 +73,7 @@
                             }
                 
                     ?>
-                    <img src="<?php echo $image ?>" style="width:30px;height:30px;float:right;border-radius:50%;">
+                    <img src="<?php echo $image ?>" style="padding-top:3px;width:30px;height:30px;float:right;border-radius:50%;">
                 </a>
                 <br>
                 <br>
@@ -86,4 +95,14 @@
                 <br>
 
             </div>
+                    
+                <!-- menu buttons-->
+             
+                <div>
+                
+                <a href="friends.php" style="text-decoration: none;color:black;"><div id="menu_button">Rank    | </div></a>
+                <a href="add.php" style="text-decoration: none;color:black;"><div id="menu_button">Add     | </div></a>
+                <a href="about.php" style="text-decoration: none;color:black;"><div id="menu_button">About    |  </div></a>
+                 <div id="menu_button">Settings</div>
+                </div>
              </body>

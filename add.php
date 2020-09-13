@@ -5,13 +5,17 @@
      include("classes/connect.php");
      include("classes/signin.php");
      include("classes/user.php");
-     include("classes/post.php");
+     
+     
 
      
 
      $signin = new Signin();
-     $user_data = $signin->check_signin($_SESSION['doorban_userid']);
-    //ridirect save to add question page
+     $userid = $signin->check_signin($_SESSION['doorban_userid']);
+     $userid= $userid['userid'];
+     
+
+
  
 
             ?>
@@ -20,55 +24,14 @@
                 <title>Add new point | Doorban</title>
                 <meta name="viewport" content="width=device-width"/>
                 <link rel="stylesheet" type="text/css "href="./css/profile.css">
-                <style>
+                <link rel="stylesheet" href="css/user-map.css" type="text/css"/>
 
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-
-    }
- /* Always set the map height explicitly to 
- 
- fine the size of the div
- * element that contains the map. */
-    #map {
-        height: 100%;
-    }
-
-    input{
-       width: 95%;
-       height: 35px;
-       padding: 1px ;
-       margin:2px 2px 25px 1px ;
-    
-    }
-    textarea{
-        width: 95%;
-        height: 35px;
-       padding: 1px ;
-       margin:2px 2px 25px 1px ;
-       }
-
-    a{
-        padding: 0px;
-        margin: 0px;
-    }
-    table{
-        font-weight: bold;
-        
-    }
-    #button1{
-        background-color: cornflowerblue;
-        border-style: none;
-    }
-
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyCRLmpZiLZ9e-p6wRbwGWH6_1AS5M31vSI">
-    </script>
+                <!-- google API &key=    -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                <script type="text/javascript"
+               
+                        src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyCRLmpZiLZ9e-p6wRbwGWH6_1AS5M31vSI">
+                </script>
             </head>
          <body>
     
@@ -140,7 +103,7 @@
                 "        <table  class=\"map1\">\n" +
                 "                <tr><td><a>Description:</a></td></tr>\n" +   
                 "                <tr><td><textarea id='manual_description' placeholder='Description'></textarea></td></tr>\n" +
-                "                <tr><td><a>question:</a></td></tr>\n" + 
+                "                <tr><td><a>Question:</a></td></tr>\n" + 
                 "                <tr><td><input  id='question' placeholder='Question'/></td></tr>\n" + 
                 "                <tr><td><a>Choice1:</a></td></tr>\n" + 
                 "                <tr><td><input  id='choice1' placeholder='Choice1'/></td></tr>\n" + 
@@ -149,13 +112,12 @@
                 "                <tr><td><a>Choice3:</a></td></tr>\n" + 
                 "                <tr><td><input  id='choice3' placeholder='Choice3'/></td></tr>\n" + 
                 "                <tr><td><a>Choice4:</a></td></tr>\n" + 
-                "                <tr><td><input  id='choice4' placeholder='Choice4'/></td></tr>\n" + 
-                "                <tr><td><a>Choice5:</a></td></tr>\n" + 
-                "                <tr><td><input  id='choice5' placeholder='Choice5'/></td></tr>\n" +       
+                "                <tr><td><input  id='choice4' placeholder='Choice4'/></td></tr>\n" +     
                 "                <tr><td><a>Correct Choice:</a></td></tr>\n" + 
                 "                <tr><td><input  id='corect_choice' placeholder='Correct Choice'/></td></tr>\n" + 
                 "                <tr><td><a>About:</a></td></tr>\n" + 
                 "                <tr><td><input  id='about' placeholder='About'/></td></tr>\n" + 
+                "                <tr><td><input type='hidden' id='userid'  value='<?php echo $userid;?>' /></td></tr>\n" + 
                 "               <tr></td><td><input id='button1' type='submit' value='Save' onclick='saveDataLocation("+lat+","+lng+")'/></td></tr>\n" +
                 "        </table>\n" +
                 "    </div>"
@@ -230,12 +192,13 @@
                     $("#description").val(locations[i][3]);
                     $("#question").val(locations[i][5]);
                     $("#about").val(locations[i][6]);
+                    $("#userid").val(locations[i][7]);
                     $("#corect_choice").val(locations[i][2]);
                     $("#choice1").val(locations[i][3]);
                     $("#choice2").val(locations[i][3]);
                     $("#choice3").val(locations[i][3]);
                     $("#choice4").val(locations[i][3]);
-                    $("#choice5").val(locations[i][3]);
+                   
                     $("#form").show();
                     infowindow.setContent(marker.html);
                     infowindow.open(map, marker);
@@ -252,13 +215,14 @@
             var description = document.getElementById('manual_description').value;
             var question = document.getElementById('question').value;
             var about = document.getElementById('about').value;
+            var userid = document.getElementById('userid').value;
             var corect_choice = document.getElementById('corect_choice').value;
             var choice1 = document.getElementById('choice1').value;
             var choice2 = document.getElementById('choice2').value;
             var choice3 = document.getElementById('choice3').value;
             var choice4 = document.getElementById('choice4').value;
-            var choice5 = document.getElementById('choice5').value;
-            var url = 'classes/locations_model.php?add_location&description=' + description + '&lat=' + lat + '&lng=' + lng + '&question=' + question  + '&about=' + about + '&corect_choice=' + corect_choice + '&choice1=' + choice1 + '&choice2=' + choice2+ '&choice3=' + choice3+ '&choice4=' + choice4+ '&choice5=' + choice5 ;
+           
+            var url = 'classes/locations_model.php?add_location&description=' + description + '&lat=' + lat + '&lng=' + lng + '&question=' + question  + '&about=' + about + '&userid=' + userid + '&corect_choice=' + corect_choice + '&choice1=' + choice1 + '&choice2=' + choice2+ '&choice3=' + choice3+ '&choice4=' + choice4;
             downloadUrl(url, function(data, responseCode) {
                 if (responseCode === 200  && data.length > 1) {
                     var markerId = getMarkerUniqueId(lat,lng); // get marker id by using clicked point's coordinate

@@ -51,7 +51,7 @@
     <body>
         <div id="grid" >
     
-        <div id="bar1" > 
+        <div id="bar1" style="background-color: cornflowerblue;"> 
             
             <div id="logo" ><img src="./image/dblogo1234.png" style="width:100px;float:left;"></div>
         

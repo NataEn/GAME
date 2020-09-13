@@ -2,40 +2,23 @@
 session_start();
 
 
-    include("classes/connect.php");
-    include("classes/signin.php");
-    include("classes/user.php");
-    include('classes/user-map.php');
+    include("classes/user-map.php");
 
-    $signin = new Signin();
-    $user_data = $signin->check_signin($_SESSION['doorban_userid']);
+
+   // print_r($_SESSION);
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Map</title>
+    <title>Play Map | Doorban</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/user-map.css" type="text/css"/>
     </head>
 <body>
-<style>
-
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
- /* Always set the map height explicitly to 
- 
- fine the size of the div
- * element that contains the map. */
-    #map {
-        height: 100%;
-    }
-</style>
+ <!-- google API &key=  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyCRLmpZiLZ9e-p6wRbwGWH6_1AS5M31vSI">
@@ -117,26 +100,21 @@ session_start();
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 map: map,
                 icon :   locations[i][4] === '1' ?  red_icon  : purple_icon,
-                html: "<div>\n" +
-                "<form method='post' action='question.php?n=location_id'>\n" +
+                html: "<div id='window_loc'>\n" +
+                "<form method='POST' action='question.php'>\n" +
                 "<table class=\"map1\">\n" +
                 "<tr>\n" +
-                "<td><textarea  disabled  id='manual_description' placeholder='Description'>"+locations[i][3]+"</textarea></td></tr>\n" +
+                "<td><input type='hidden'  id='manual_description'/>"+locations[i][3]+"</td></tr>\n" +
                 "<tr>\n" +
                 "<td><textarea disabled  id='question' placeholder='Question'>"+locations[i][5]+"</textarea></td></tr>\n" +
                 "<tr>\n" +
-                "<td><input type='hidden' id='location_id' />"+locations[i][0]+"</td></tr>\n" +
-                "<tr>\n" +
-                "<td><input type='submit' value='Play' onclick='play()' /></td></tr>\n" +
+                "<td><input type='hidden' name='location_id id='location_id' value='"+locations[i][0]+"' /></td></tr>\n" +
+                "<td><input id='button1' name='play' type='submit' value='play' onclick='play' /> </td></tr>\n" +
                 "</table>\n" +
                 "</form>\n" +
                 "</div>"
             });
-            function play(id){
-                var id = document.getElementById('location_id').value;
-                var url = 'classes/qidex.php?play&location_id=' + id ;
-            
-            }
+
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
@@ -153,7 +131,17 @@ session_start();
         }
 
 
-        function downloadUrl(url, callback) {
+
+
+        function play(location_id) {
+            var location_id = document.getElementById('location_id').value;
+            var url = 'classes/user-map.php?play&location_id=' +location_id;
+
+        }
+           
+
+
+         function downloadUrl(url, callback) {
             var request = window.ActiveXObject ?
                 new ActiveXObject('Microsoft.XMLHTTP') :
                 new XMLHttpRequest;

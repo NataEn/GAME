@@ -9,8 +9,10 @@ session_start();
    
     $signin = new Signin();
     $user_data = $signin->check_signin($_SESSION['doorban_userid']);
+print_r($_SESSION);
 
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
