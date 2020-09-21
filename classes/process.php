@@ -1,5 +1,8 @@
 <?php
 
+include('q-db.php'); 
+
+
 //check if score is set error hendler 
 if(!isset($_SESSION['score'])){
     $_SESSION['score'] = 0 ;
@@ -8,21 +11,15 @@ if(!isset($_SESSION['score'])){
    
 
 //check if submit
-//if($_POST){
-   // $location_id = $_SESSION['location_id'];
-   // $selected_choise = $_POST['choises'];
-//}
+if($_POST){
+  
+    $selected_choise = $_GET['choises'];   
+}
 
 
- // get total questions
-//$query = "SELECT * FROM `locations` where location_id = $id";
-//get results
-//$results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
-//$total = $results->num_rows;
-
-
+$location_id = $_GET['location_id']; 
 //get correct choice
-$query = "SELECT * FROM `choises` WHERE location_id = $location_id And is_corect = 1 ";
+$query = "SELECT * FROM `choises` WHERE location_id = '$location_id' And is_corect = 1 ";
 
 //get result
 $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
@@ -37,5 +34,10 @@ $corect_choise = $row['id'];
 if($corect_choise == $selected_choise){
     //answer is correct
     $_SESSION['score']++;
+    header("Location: ../final.php");
+}
+
+else{
+header ("Location: ../question.php"."Try again");
 }
 

@@ -5,7 +5,7 @@ session_start();
     include("classes/connect.php");
     include("classes/signin.php");
     include("classes/user.php");
-    
+    include('classes/q-db.php');
    
     $signin = new Signin();
     $user_data = $signin->check_signin($_SESSION['doorban_userid']);
@@ -35,7 +35,7 @@ print_r($_SESSION);
                 <h2> You're Great !</h2>
                     <p>Congrats! You have completed this point</p>
                     <p>Final Score : <?php echo $_SESSION['score'];?></p>
-                    <a href="question.php?n=1" class="start"> Take Again</a>
+                    <a href="question.php" class="start"> Take Again</a>
             </div>
         </main>
 

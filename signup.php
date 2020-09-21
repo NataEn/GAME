@@ -1,41 +1,9 @@
 <?php
 
 //conect to DB with classes
-    include("classes/connect.php");
+  
     include("classes/signup.php");
-
-    $first_name="";
-    $last_name="";
-    $gender="";
-    $email = "";
-
-
-    if($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-        $signup = new Signup();
-        $result = $signup->evaluate($_POST);
-
-        if($result != "")
-        {
-            //if error echo 
-            echo "<div style='text-align:center;font-size:12;color:white;background-color:grey;'>";
-            echo "<br>The following errors have occured:<br><br>";
-            echo $result;
-            echo "</div>";
-        }
-        else { //else redirect to login page 
-            header(("Location: signin.php"));
-            die;
-        }
-        // save progress if post uncomplite form
-            $first_name = $_POST['first_name'];
-             $last_name = $_POST['last_name'];
-             $age = $_POST['age'];
-             $gender = $_POST['gender'];
-             $email = $_POST['email'];
-    }
-   
-
+ 
 
 ?>
 
@@ -83,8 +51,8 @@
                 <br><br>
                 <input value="<?php echo $email ?>"name="email" type="text" id="text" placeholder="Email">
                 <br><br>
-                <input name="password" type="password" id="text" placeholder="Passsword"
-                ><br><br>
+                <input name="password" type="password" id="text" placeholder="Passsword">
+                <br><br>
                 <input name="password2" type="password" id="text" placeholder="Retype password">
                 <br><br>
                 <input type="submit" id="button" value="Sign up">

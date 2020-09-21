@@ -1,4 +1,5 @@
 <?php
+
 print_r($_SESSION);
 
 include("classes/connect.php");
@@ -6,14 +7,11 @@ include("classes/signin.php");
 include("classes/user.php");
 
 
-
 //check if signed in
 $signin = new Signin();
 $user_data = $signin->check_signin($_SESSION['doorban_userid']);
 
 
-
-//check if location_id is set error hendler 
 
 
 
@@ -36,7 +34,7 @@ exit();
 
 
 //set question number
-$number = (int)$_SESSION['location_id'];
+$number = $_GET['location_id'];
 
 //get question
 $query = "SELECT question FROM `locations` where location_id = $number";
@@ -61,3 +59,5 @@ $results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
 $total = $results->num_rows;
 
     
+
+
