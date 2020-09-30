@@ -78,15 +78,15 @@
 
 
                     <!-- points earned -->
-                <div id="points" style="flex: 5;box-shadow: black 1px 1px;background-color:#e69900;text-align:center;
-                        font-size:25px;background-size:100%;margin-left:10px;padding-top:20px;border-radius:3px;" >
+                <div id="points" style="flex: 5;box-shadow: black 1px 1px;background-color:#a4c0f4;text-align:center;
+                        font-size:25px;background-size:100%;margin-left:10px;padding-top:8px;border-radius:3px;" >
 
                     <!--show points_earned-->
                            <!--user name from db-->
-                     <div style="font-size: 30px;margin:4px;margin-bottom:1px;text-shadow: black 0px 1px;color:white;"><b><?php echo $user_data['first_name'] . " " . $user_data['last_name']; ?></b></div>
+                     <div style="font-size: 30px;margin:1px;margin-bottom:1px;text-shadow: white 0px 1px;color:black;"><b><?php echo $user_data['first_name'] . " " . $user_data['last_name']; ?></b></div>
                
-                    <span id="points_earned" style="font-size: 20px;" >Points achieved <br><br>
-                    <span style="font-family:Arial, Helvetica, sans-serif;font-size:38px;color:white;box-shadow: black 1px 1px;
+                    <span id="points_earned" style="font-size: 16px;" >Points achieved <br><br>
+                    <span style="font-family:Arial, Helvetica, sans-serif;font-size:28px;color:white;box-shadow: black 1px 1px;
                         text-shadow: black 0px 1px;background-color:cornflowerblue;padding:10px;border-radius:3px;">
                      <b><?php echo $score; ?></b></span> </span> 
                    
@@ -105,21 +105,18 @@
           
                 <br>
            <!-- badges earned -->
-           <div id="points_badges" style="box-shadow: black 1px 1px;background-color:cornflowerblue;text-align:center;
-                        font-size:25px;width:100%;padding-top:20px;display:inline-block;border-radius:3px;" >
+           <div id="points_badges" style="box-shadow: black 1px 1px;background-color:white;text-align:center;
+                        font-size:25px;width:100%;padding-top:8px;display:inline-block;border-radius:3px;" >
                
-                    <br>
-                    
                     <!--show basges_earned-->
-                    <span id="points_earned" style="font-size: 20px;" >Badges colection <br><br>
+                    <span id="points_earned" style="font-size: 20px;" >Badges collection <br></span>
                     <span style="font-size:38px;color:white;
-                        text-shadow: black 0px 1px;padding:6px;">
-                     <b><?php //echo $score; ?> </b></span> </span> 
-                   
-                    <!--show badges_earned-->
-                    <span id="badges_earned">  <br><?php //echo $badges_earned ?>   </span>
+                        text-shadow: black 0px 1px;">
+
+                   <img id="badges" src="image/Screenshot (207).png" style="width: 40%;padding-top:0px;">
+                    </span>
                     <br>
-    
+                    <br>
 
 
             <!--below cover posts -->

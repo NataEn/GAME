@@ -64,14 +64,12 @@ $location_id = $_SESSION['location_id'];
                 <!-- The four columns image slider-->
                 <div class="slid">
                       <div class="column">
-                        <img src="image/IMG_20180119_140806_HDR.jpg" alt="Alps" style="width:100%" onclick="myFunction(this);">
+                        <img src="image/325px-All_Gizah_Pyramids.jpg" alt="" style="width:100%" onclick="myFunction(this);">
                       </div>
                       <div class="column">
-                        <img src="image/IMG_20180120_104809_HDR.JPG" alt="Alps" style="width:100%" onclick="myFunction(this);">
+                        <img src="image/450px-Egypt_dauingevekten.JPG" alt="" style="width:100%" onclick="myFunction(this);">
                       </div>
-                      <div class="column">
-                        <img src="image/20180904_092335.JPG" alt="Beach" style="width:100%" onclick="myFunction(this);">
-                      </div>
+                 
                      
                   </div>
                   
