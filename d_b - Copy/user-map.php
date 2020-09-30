@@ -5,7 +5,7 @@ session_start();
     include("classes/user-map.php");
 
 
-   // print_r($_SESSION);
+   //print_r($_SESSION);
 
 ?>
 
@@ -21,9 +21,8 @@ session_start();
  <!-- google API &key=  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyCRLmpZiLZ9e-p6wRbwGWH6_1AS5M31vSI">
-    </script>
-
+            src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyCRLmpZiLZ9e-p6wRbwGWH6_1AS5M31vSI"></script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRLmpZiLZ9e-p6wRbwGWH6_1AS5M31vSI&libraries=places"></script>
 
  <!--top bar-->
  <div>
@@ -43,8 +42,8 @@ session_start();
         
         var locations = <?php get_confirmed_locations() ?>;
         var myOptions = {
-            zoom: 3,
-            center: new google.maps.LatLng(32.87916, 33.32910),
+            zoom: 7,
+            center: new google.maps.LatLng(31.87916, 35.32910),
             mapTypeId: 'roadmap'
         };
         map = new google.maps.Map(document.getElementById('map'), myOptions);

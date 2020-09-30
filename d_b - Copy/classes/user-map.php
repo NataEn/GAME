@@ -7,7 +7,7 @@ include("classes/user.php");
 
 $signin = new Signin();
 $user_data = $signin->check_signin($_SESSION['doorban_userid']);
-
+$_SESSION['score'] = $user_data['score'];
 
 
 function get_confirmed_locations(){

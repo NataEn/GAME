@@ -5,19 +5,18 @@
      include("classes/connect.php");
      include("classes/signin.php");
      include("classes/user.php");
-     
-     
+     include("classes/add.php");
+     //include("classes/image.php");
 
      
 
      $signin = new Signin();
      $userid = $signin->check_signin($_SESSION['doorban_userid']);
      $userid= $userid['userid'];
-     
+    
 
 
- 
-
+      
             ?>
             <html>
             <head>
@@ -102,9 +101,9 @@
                 html: "    <div  id='info_"+markerId+"'>\n" +
                 "        <table  class=\"map1\">\n" +
                 "                <tr><td><a>Description:</a></td></tr>\n" +   
-                "                <tr><td><textarea id='manual_description' placeholder='Description'></textarea></td></tr>\n" +
+                "                <tr><td><textarea id='manual_description' placeholder='Write the name of the place or other description'></textarea></td></tr>\n" +
                 "                <tr><td><a>Question:</a></td></tr>\n" + 
-                "                <tr><td><input  id='question' placeholder='Question'/></td></tr>\n" + 
+                "                <tr><td><input  id='question' placeholder='Write a Question'/></td></tr>\n" + 
                 "                <tr><td><a>Choice1:</a></td></tr>\n" + 
                 "                <tr><td><input  id='choice1' placeholder='Choice1'/></td></tr>\n" + 
                 "                <tr><td><a>Choice2:</a></td></tr>\n" + 
@@ -112,11 +111,12 @@
                 "                <tr><td><a>Choice3:</a></td></tr>\n" + 
                 "                <tr><td><input  id='choice3' placeholder='Choice3'/></td></tr>\n" + 
                 "                <tr><td><a>Choice4:</a></td></tr>\n" + 
-                "                <tr><td><input  id='choice4' placeholder='Choice4'/></td></tr>\n" +     
+                "                <tr><td><input  id='choice4' placeholder='Choice4'/></td></tr>\n" +    
                 "                <tr><td><a>Correct Choice:</a></td></tr>\n" + 
-                "                <tr><td><input  id='corect_choice' placeholder='Correct Choice'/></td></tr>\n" + 
+                "                <tr><td><input type='number' id='corect_choice' placeholder='Correct Choice 1/2/3/4?'/></td></tr>\n" + 
                 "                <tr><td><a>About:</a></td></tr>\n" + 
-                "                <tr><td><input  id='about' placeholder='About'/></td></tr>\n" + 
+                "                <tr><td><input  id='about' placeholder='Add about '/></td></tr>\n" + 
+   
                 "                <tr><td><input type='hidden' id='userid'  value='<?php echo $userid;?>' /></td></tr>\n" + 
                 "               <tr></td><td><input id='button1' type='submit' value='Save' onclick='saveDataLocation("+lat+","+lng+")'/></td></tr>\n" +
                 "        </table>\n" +
@@ -198,7 +198,7 @@
                     $("#choice2").val(locations[i][3]);
                     $("#choice3").val(locations[i][3]);
                     $("#choice4").val(locations[i][3]);
-                   
+                    
                     $("#form").show();
                     infowindow.setContent(marker.html);
                     infowindow.open(map, marker);
@@ -231,8 +231,9 @@
                     infowindow.close();
                     infowindow.setContent("<div style=' color: purple; font-size: 15px;'> Waiting for admin confirm!!</div>");
                     infowindow.open(map, manual_marker);
+
                     //direct to location question form 
-                    window.location.href = "add.php";
+                    window.location.href = "add_location_image.php";
      
 
                 }else{
@@ -261,6 +262,52 @@
 
     </script>
 
+
+
+        <script>
+        var x = document.getElementById("map");
+        function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        }
+
+        function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+        }
+
+
+
+         function showError(error) {
+            switch(error.code) {
+            case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+            case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+            case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+            case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+        }
+        }
+
+
+           function showPosition(position) {
+                var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+                var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=
+                "+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_KEY";
+
+                document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+                }
+                </script>
 
 
 

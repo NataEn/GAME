@@ -11,7 +11,7 @@
             $signin = new Signin();
             $user_data = $signin->check_signin($_SESSION['doorban_userid']);
            
- 
+            $score = $user_data['score'];
                 //collect posts  
 
             //  $post = new Post();
@@ -25,9 +25,9 @@
                 <title>Profile | Doorban</title>
                 <meta name="viewport" content="width=device-width"/>
                 <link rel="stylesheet" type="text/css "href="./css/profile.css">
-                
+        
             </head>
-         <body>
+         <body >
     
 
             <!--top bar-->
@@ -37,6 +37,8 @@
             </div>
                  
                  <div style="padding: 3px;">
+          
+                
             <div style="display:flex;">
 
                 <!-- profile pic-->
@@ -69,29 +71,31 @@
                    
                     
                 </span>
-                
                 <br>
-                <!--user name from db-->
-                <div style="font-size: 30px;"><?php echo $user_data['first_name'] . " " . $user_data['last_name']; ?></div>
                 <br>
+             
                 </div>
 
 
                     <!-- points earned -->
-                <div id="points_badges" style="flex: 5;background-color:#1111;text-align:center;font-size:25px;background-size:100%;margin-left:10px;padding-top:20px;" >
-               
-               
+                <div id="points" style="flex: 5;box-shadow: black 1px 1px;background-color:#e69900;text-align:center;
+                        font-size:25px;background-size:100%;margin-left:10px;padding-top:20px;border-radius:3px;" >
+
                     <!--show points_earned-->
-                    <span id="points_earned" ><?php echo $_SESSION['score']; ?>  Points  </span> 
-                    <br>
-                    <br>
+                           <!--user name from db-->
+                     <div style="font-size: 30px;margin:4px;margin-bottom:1px;text-shadow: black 0px 1px;color:white;"><b><?php echo $user_data['first_name'] . " " . $user_data['last_name']; ?></b></div>
+               
+                    <span id="points_earned" style="font-size: 20px;" >Points achieved <br><br>
+                    <span style="font-family:Arial, Helvetica, sans-serif;font-size:38px;color:white;box-shadow: black 1px 1px;
+                        text-shadow: black 0px 1px;background-color:cornflowerblue;padding:10px;border-radius:3px;">
+                     <b><?php echo $score; ?></b></span> </span> 
+                   
                     <!--show badges_earned-->
-                    <span id="badges_earned" src="<?php echo $badges_earned ?> "> 3 Badges </span>
+                    <span id="badges_earned">  <br><?php //echo $badges_earned ?>   </span>
                     <br>
               
 
-                <br>
-                <br>                
+                               
                 </div>
                     <br>
                 
@@ -99,18 +103,30 @@
 
          
           
-                
-          
+                <br>
+           <!-- badges earned -->
+           <div id="points_badges" style="box-shadow: black 1px 1px;background-color:cornflowerblue;text-align:center;
+                        font-size:25px;width:100%;padding-top:20px;display:inline-block;border-radius:3px;" >
+               
+                    <br>
+                    
+                    <!--show basges_earned-->
+                    <span id="points_earned" style="font-size: 20px;" >Badges colection <br><br>
+                    <span style="font-size:38px;color:white;
+                        text-shadow: black 0px 1px;padding:6px;">
+                     <b><?php //echo $score; ?> </b></span> </span> 
+                   
+                    <!--show badges_earned-->
+                    <span id="badges_earned">  <br><?php //echo $badges_earned ?>   </span>
+                    <br>
     
-    
+
+
             <!--below cover posts -->
 
-
-
-
-           
+           <!--
             <div id="post_bar">
-                    <!--posts are posted here-->
+                    posts are posted here
 
                 <?php
             
@@ -130,13 +146,14 @@
                 ?>
 
             </div>
-
+                 -->
 
             </div>
         
-        
             <br>
-<br>
+            <br>
+            <br>
+            <br>
 <?php
 include_once 'footer.php';
 

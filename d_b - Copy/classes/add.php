@@ -1,11 +1,21 @@
 <?php
 
+// check if member is elegeble to add new cordinations
+ $score = $_SESSION['score'];
+
+ if($score < 100000){
+header("Location: add_sorry.php");
+ }
+
+
 if(isset($_GET['add_location'])) {
     add_location();
 
 }
 
-
+if(isset($_GET)){
+    unset($_SESSION["location_id"]);
+}
 
 function add_location(){
 
@@ -40,26 +50,37 @@ function add_location(){
 
     // Inserts new row with place data.
     $query = sprintf("INSERT INTO `locations`(location_id, lat, lng, description,question,about,userid)  VALUES ('$location_id', '$lat', '$lng','$description','$question','$about','$userid')",
+       
+    $last_id = mysqli_insert_id($con),
+    $location_id = $last_id,
+    $location_id = $_SESSION['location_id'],
+  
         mysqli_real_escape_string($con,$lat),
         mysqli_real_escape_string($con,$lng),
         mysqli_real_escape_string($con,$description));
 
         
+
+       
     
       
     $result = mysqli_query($con,$query);
-    echo"Inserted Successfully";
+ 
     if (!$result) {
         die('Invalid query: ' . mysqli_error($con));
     }
 
 
 
+
+    
+
         
-    //validate insert to question
+    //validate insert to question & insert choices
 
     if($query){
         $last_id = mysqli_insert_id($con);
+        
         //get choices
         foreach($choices as $choice => $value){
             //check if value existe
@@ -78,7 +99,8 @@ function add_location(){
                 $insert_row = $con->query($query) or die ($con->error.__LINE__);    
                 //validate insert 
                 if($insert_row){
-                    continue;
+                  $_SESSION['last_id'] = $last_id;
+
                 }
                 else{
                     die('Error : ('.$con->errno .') '.$con->error);
@@ -88,14 +110,11 @@ function add_location(){
       
        // $msg = 'Question has been submited for admin confirm';
     }
+
+  
+
+
 }
-
-
-
-
-
-
-
 
 function array_flatten($array) {
     if (!is_array($array)) {

@@ -26,5 +26,5 @@
 
         <h2 > Thank you for regisrating,</h2>
         <p> Please check your email a verification mail has been sent.<br>
-         <i class="far fa-paper-plane fa-9x" style="padding-top: 27px;"></i></p>
+         <i class="far fa-paper-plane fa-6x" style="padding-top: 27px;"></i></p>
         </div>

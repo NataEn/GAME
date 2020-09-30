@@ -10,7 +10,7 @@
 
 <html>
             <head>
-                <title>Profile | Doorban</title>
+                <title>Contact Us | Doorban</title>
                 <meta name="viewport" content="width=device-width"/>
                 <link rel="stylesheet" type="text/css "href="./css/contactus.css">
                 
@@ -37,11 +37,11 @@
                         <input  type="text" id="email" name="email" placeholder="<?php echo $email;?>">
 
                         <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="Write something.." />
+                        <input type="text" id="subject" name="subject" placeholder="Write something.." required/>
 
                         
                         <label for="msg">Message</label>
-                        <textarea id="msg" name="msg" placeholder="Write something.." style="height:200px"></textarea>
+                        <textarea id="msg" name="msg" placeholder="Write something.." style="height:200px" required></textarea>
 
                         <input type="submit" value="Submit" name="submit">
                     </form>

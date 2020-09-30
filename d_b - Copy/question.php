@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-//print_r($_SESSION);
+
 
 include("classes/connect.php");
 include("classes/signin.php");
@@ -16,10 +16,10 @@ $user_data = $signin->check_signin($_SESSION['doorban_userid']);
 
 
 //set question number
-$number = $_GET['location_id'];
+$location_id = $_GET['location_id'];
 
 //get question
-$query = "SELECT question FROM `locations` where location_id = $number";
+$query = "SELECT question FROM `locations` where location_id = $location_id";
 
 
 //get result
@@ -31,21 +31,21 @@ $question = $result->fetch_assoc();
 if ($question > ""){
 
     //acsses about
-    $query = "SELECT about FROM `locations` where location_id = $number";
+    $query = "SELECT about FROM `locations` where location_id = $location_id";
     
     //get about
     $resultd = $mysqli->query($query) or die ($mysqli->error.__LINE__);
     //show about
     $about = $resultd->fetch_assoc();
         //get url
-        $query = "SELECT url FROM `locations` where location_id = $number";
+        $query = "SELECT url FROM `locations` where location_id = $location_id";
     
         //get result
         $resultd = $mysqli->query($query) or die ($mysqli->error.__LINE__);
         $url = $resultd->fetch_assoc();
 
                 //get choice
-        $query = "SELECT * FROM `choises` where location_id = $number";
+        $query = "SELECT * FROM `choises` where location_id = $location_id";
 
 
         //get results
@@ -70,10 +70,10 @@ $results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
     <head>
         <meta charset= "utf-8"/>
         <meta name="viewport" content="initial-scale=1.0">
-        <title> </title>
+        <title>Play | DoorBan </title>
         <link rel="stylesheet" href="css/qindex.css" type="text/css"/>
     </head>
-    <body>
+    <body style=" background-color: #d1dffa;padding:0px;">
       
   
         <div>
@@ -82,11 +82,11 @@ $results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
         </div>
  
         
-        <main style=" background-color: #d1dffa;">
+        <main style=" background-color: #d1dffa;padding:0px;">
             <!-- about and more info-->
-            <div class="container">
+          
                 <div class="current" style="width:90%;text-align:right;background-color:#d1dffa;border-radius:4px;
-                    box-shadow: 1px 1px 2px;" > <?php echo $about['about'];?><br>
+                    box-shadow: 1px 1px 2px; " > <?php echo $about['about'];?><br>
                     <p>
                         <!--read more button-->
                         <a style="background-color:#bbd0f6;font-size:20px;
@@ -117,10 +117,10 @@ $results = $mysqli->query($query) or die ($mysqli->error.__LINE__);
                         <!--submit / play button-->
                     <input type="submit" value="Play" name="play" style="background-color:#bbd0f6;font-size:20px;
                         width: 70px;text-align: center;padding: 4px;border-radius: 4px;float: right;border-color:#a4c0f4;"/>
-                    <input type="hidden" value="<?php echo $number;?>" name="location_id"/>
+                    <input type="hidden" value="<?php echo $location_id;?>" name="location_id"/>
                     </form>
                 </div>
-            </div>
+           
             <br>
             <br>
         </main>

@@ -6,7 +6,4 @@
    
     $signin = new Signin();
     $user_data = $signin->check_signin($_SESSION['doorban_userid']);
-
-//print_r($_SESSION);
-
-    
+ 

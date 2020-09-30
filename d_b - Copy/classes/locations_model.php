@@ -16,6 +16,8 @@ if(isset($_GET['confirm_location'])) {
 }
 
 
+
+
 function add_location(){
 
 
@@ -111,19 +113,24 @@ function confirm_location(){
     }
     $location_id =$_GET['location_id'];
     $confirmed =$_GET['confirmed'];
-    $question =$_GET['question'];
-    $description =$_GET['description'];
-    $about = $_GET['about'];
+    $description =ucfirst($_GET['description']);
+    $question =ucfirst($_GET['question']);
+    $about =ucfirst($_GET['about']);
+
 
     // update location with confirm if admin confirm.
-    $query = "UPDATE `locations` SET location_status = $confirmed WHERE location_id = $location_id  ";
+    $query = "UPDATE `locations` SET location_status=$confirmed WHERE location_id = $location_id  ";
     $result = mysqli_query($con,$query); 
 
+    if($result = mysqli_query($con,$query)){
+    $query1 = "UPDATE `locations` SET about=$about WHERE location_id = $location_id  ";
+    $result = mysqli_query($con,$query1);
+    }
     //not working!!!
     //$query = "INSERT INTO `locations` (description,question,about) VALUES ('$description','$question','$about') WHERE location_id = $location_id ";
     //$result = mysqli_query($con,$query); 
     /////////////////////////////////
-
+    
 
     echo "Inserted Successfully";
     if (!$result) {

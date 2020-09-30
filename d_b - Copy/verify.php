@@ -1,20 +1,5 @@
 <?php
-if(isset($_GET['vkey'])){
-    //process verification
-    $vkey = $_GET['vkey'];
-
-    $mysqli = NEW MySQLI('localhost','root','','doorban');
-    $resultSet = $mysqli->query("SELECT verified,vkey FROM members where verified = 0 AND vkey = '$vkey' limit 1 ");
-
-    if($resultSet->num_rows == 1){
-        //validate the email
-        $update = $mysqli->query("UPDATE MEMBERS SET verified = 1 where vkey = '$vkey' limit 1");
-
-    
-    }
-}else{
-    die("Somthing went wrong");
-}
+include("classes/verify.php")
 
 
 ?>
@@ -27,6 +12,9 @@ if(isset($_GET['vkey'])){
         <link rel="stylesheet" type="text/css "href="./css/sign.css">
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
     <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
         a{
         display: inline-block;
         color: black;
@@ -47,7 +35,8 @@ if(isset($_GET['vkey'])){
             </div>
     </div>
 <div>
-    <h2 > Your account is verified.</h2>
+    <h2> Your account is verified </h2>
+    
     <p> <a href="signin.php" style="text-decoration:none ;">Sign in</a>
     
      </p>

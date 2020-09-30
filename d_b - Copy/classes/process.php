@@ -18,7 +18,8 @@ $user_data = $signin->check_signin($_SESSION['doorban_userid']);
 
 
 $location_id = $_GET['location_id']; 
-   
+    //get userid
+$userid = $user_data['userid'];   
 $play = $_GET['play'];
 //check if submit
 if ($play > ""){
@@ -38,38 +39,77 @@ $row = $result->fetch_assoc();
 //set correct choice
 $corect_choise = $row['id_c'];
 
+
 //if corect answer
 if($corect_choise == $selected_choise){
-    
-    //get userid
-    $userid = $user_data['userid'];
-    //get user score
-    $query="SELECT score FROM `members` WHERE userid = $userid";
-    //get result
-    $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
-    $row = mysqli_fetch_array($result);
-    //echo $row['score'];
 
-    //points for corect answer
-    $score = 25;
-    //user score+ new points
-    $_SESSION['score'] = $score + $row['score'];
-    //save new score
-    $new_score= $_SESSION['score'];
-    $query = "UPDATE `members` SET score='$new_score' WHERE userid=$userid ";
-    //get result
-    $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
-    //redirect to score
-    header("Location: ../final.php") ;
 
-    
+        $corect = 1;
+        //check if user had answered this question
+        $query = "SELECT * FROM user_corect_question WHERE location_id=$location_id and userid=$userid ";
+        $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+        $row = mysqli_fetch_array($result);
+        
+
+        if($row){
+
+                  //get user score
+                  $query="SELECT score FROM `members` WHERE userid = $userid";
+                  //get result
+                  $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+                  $row = mysqli_fetch_array($result);
+                  //echo $row['score'];
+        
+                  //points for corect answer
+                  $score = 1;
+                  //user score+ new points
+                  $_SESSION['score'] = $score + $row['score'];
+                  //save new score
+                  $new_score= $_SESSION['score'];
+                  $query = "UPDATE `members` SET score='$new_score' WHERE userid=$userid ";
+                  //get result
+                  $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+                  $_SESSION['location_id'] = $_GET['location_id'];
+                  //redirect to score
+                  header("Location: ../final.php") ;
+        }else{
+ 
+                    $query = "INSERT INTO user_corect_question (location_id,userid,corect) VALUES ('$location_id','$userid','$corect')";
+                    // save to db
+                    $DB = new Database();
+                    $DB->save($query);
+
+
+                            //get user score
+                    $query="SELECT score FROM `members` WHERE userid = $userid";
+                    //get result
+                    $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+                    $row = mysqli_fetch_array($result);
+                    //echo $row['score'];
+
+                    //points for corect answer
+                    $score = 25;
+                    //user score+ new points
+                    $_SESSION['score'] = $score + $row['score'];
+                    //save new score
+                    $new_score= $_SESSION['score'];
+                    $query = "UPDATE `members` SET score='$new_score' WHERE userid=$userid ";
+                    //get result
+                    $result = $mysqli->query($query) or die ($mysqli->error.__LINE__);
+                    $_SESSION['location_id'] = $_GET['location_id'];
+                    //redirect to score
+                    header("Location: ../final.php") ;
+        }      
+    }
+else{
+    header ("Location: ../tryagain.php");
+    echo $_GET['location_id'];
+}
 
 }
 
 else{
-header ("Location: ../try_again.php"."Try again");
+    header ("Location: ../tryagain.php");
+    echo $_GET['location_id'];
 }
-}
-else{
-    echo $error."Please Select Answer. ";
-}
+
