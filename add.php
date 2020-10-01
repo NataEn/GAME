@@ -49,10 +49,9 @@
         /**
          * Create new map
          */
-        var infowindow;
-        var map;
-        var purple_icon =  'http://maps.google.com/mapfiles/ms/icons/purple-dot.png' ;
-        var myOptions = {
+        let infowindow, map;
+        let purple_icon =  'http://maps.google.com/mapfiles/ms/icons/purple-dot.png' ;
+        let myOptions = {
             zoom: 3,
             center: new google.maps.LatLng(46.87916, -3.32910),
             mapTypeId: 'roadmap'
@@ -63,7 +62,7 @@
          * Global marker object that holds all markers.
          * @type {Object.<string, google.maps.LatLng>}
          */
-        var markers = {};
+        const markers = {};
 
         /**
          * Concatenates given lat and lng with an underscore and returns it.
@@ -72,7 +71,7 @@
          * @param {!number} lng Longitude.
          * @return {string} Concatenated marker id.
          */
-        var getMarkerUniqueId= function(lat, lng) {
+        const getMarkerUniqueId= (lat, lng)=> {
             return lat + '_' + lng;
         };
 
@@ -83,18 +82,18 @@
          * @param {!number} lng Longitude.
          * @return {google.maps.LatLng} An instance of google.maps.LatLng object
          */
-        var getLatLng = function(lat, lng) {
+        const getLatLng = (lat, lng) =>{
             return new google.maps.LatLng(lat, lng);
         };
 
         /**
          * Binds click event to given map and invokes a callback that appends a new marker to clicked location.
          */
-        var addMarker = google.maps.event.addListener(map, 'click', function(e) {
-            var lat = e.latLng.lat(); // lat of clicked point
-            var lng = e.latLng.lng(); // lng of clicked point
-            var markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
-            var marker = new google.maps.Marker({
+        let addMarker = google.maps.event.addListener(map, 'click', (e)=> {
+            let lat = e.latLng.lat(); // lat of clicked point
+            let lng = e.latLng.lng(); // lng of clicked point
+            let markerId = getMarkerUniqueId(lat, lng); // an that will be used to cache this marker in markers object.
+            let marker = new google.maps.Marker({
                 position: getLatLng(lat, lng),
                 map: map,
                 animation: google.maps.Animation.DROP,
@@ -131,10 +130,10 @@
          * Binds  click event to given marker and invokes a callback function that will remove the marker from map.
          * @param {!google.maps.Marker} marker A google.maps.Marker instance that the handler will binded.
          */
-        var bindMarkerinfo = function(marker) {
-            google.maps.event.addListener(marker, "click", function (point) {
-                var markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
-                var marker = markers[markerId]; // find marker
+        const bindMarkerinfo = (marker) =>{
+            google.maps.event.addListener(marker, "click",  (point)=> {
+                let markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
+                let marker = markers[markerId]; // find marker
                 infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(marker.html);
                 infowindow.open(map, marker);
@@ -146,10 +145,10 @@
          * Binds right click event to given marker and invokes a callback function that will remove the marker from map.
          * @param {!google.maps.Marker} marker A google.maps.Marker instance that the handler will binded.
          */
-        var bindMarkerEvents = function(marker) {
+        let bindMarkerEvents = function(marker) {
             google.maps.event.addListener(marker, "rightclick", function (point) {
-                var markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
-                var marker = markers[markerId]; // find marker
+                let markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng()); // get marker id by using clicked point's coordinate
+                let marker = markers[markerId]; // find marker
                 removeMarker(marker, markerId); // remove it
             });
         };
@@ -159,7 +158,7 @@
          * @param {!google.maps.Marker} marker A google.maps.Marker instance that will be removed.
          * @param {!string} markerId Id of marker.
          */
-        var removeMarker = function(marker, markerId) {
+        const removeMarker = (marker, markerId)=> {
             marker.setMap(null); // set markers setMap to null to remove it from map
             delete markers[markerId]; // delete marker instance from markers object
         };
@@ -168,8 +167,8 @@
         /**
          * loop through (Mysql) dynamic locations to add markers to map.
          */
-        var i ; var confirmed = 0;
-        for (i = 0; i < location.length; i++) {
+         let confirmed = 0;
+        for (let i = 0; i < location.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 map: map,
@@ -211,22 +210,22 @@
          * @param lat  A latitude of marker.
          * @param lng A longitude of marker.
          */
-        function saveDataLocation(lat,lng) {
-            var description = document.getElementById('manual_description').value;
-            var question = document.getElementById('question').value;
-            var about = document.getElementById('about').value;
-            var userid = document.getElementById('userid').value;
-            var corect_choice = document.getElementById('corect_choice').value;
-            var choice1 = document.getElementById('choice1').value;
-            var choice2 = document.getElementById('choice2').value;
-            var choice3 = document.getElementById('choice3').value;
-            var choice4 = document.getElementById('choice4').value;
+        const saveDataLocation=(lat,lng) =>{
+            let description = document.getElementById('manual_description').value;
+            let question = document.getElementById('question').value;
+            let about = document.getElementById('about').value;
+            let userid = document.getElementById('userid').value;
+            let corect_choice = document.getElementById('corect_choice').value;
+            let choice1 = document.getElementById('choice1').value;
+            let choice2 = document.getElementById('choice2').value;
+            let choice3 = document.getElementById('choice3').value;
+            let choice4 = document.getElementById('choice4').value;
            
-            var url = 'classes/locations_model.php?add_location&description=' + description + '&lat=' + lat + '&lng=' + lng + '&question=' + question  + '&about=' + about + '&userid=' + userid + '&corect_choice=' + corect_choice + '&choice1=' + choice1 + '&choice2=' + choice2+ '&choice3=' + choice3+ '&choice4=' + choice4;
+            let url = 'classes/locations_model.php?add_location&description=' + description + '&lat=' + lat + '&lng=' + lng + '&question=' + question  + '&about=' + about + '&userid=' + userid + '&corect_choice=' + corect_choice + '&choice1=' + choice1 + '&choice2=' + choice2+ '&choice3=' + choice3+ '&choice4=' + choice4;
             downloadUrl(url, function(data, responseCode) {
                 if (responseCode === 200  && data.length > 1) {
-                    var markerId = getMarkerUniqueId(lat,lng); // get marker id by using clicked point's coordinate
-                    var manual_marker = markers[markerId]; // find marker
+                    let markerId = getMarkerUniqueId(lat,lng); // get marker id by using clicked point's coordinate
+                   let manual_marker = markers[markerId]; // find marker
                     manual_marker.setIcon(purple_icon);
                     infowindow.close();
                     infowindow.setContent("<div style=' color: purple; font-size: 15px;'> Waiting for admin confirm!!</div>");
@@ -243,12 +242,12 @@
             });
         }
 
-        function downloadUrl(url, callback) {
+        const downloadUrl=(url, callback) =>{
             var request = window.ActiveXObject ?
                 new ActiveXObject('Microsoft.XMLHTTP') :
                 new XMLHttpRequest;
 
-            request.onreadystatechange = function() {
+            request.onreadystatechange = () =>{
                 if (request.readyState == 4) {
                     callback(request.responseText, request.status);
                 }
